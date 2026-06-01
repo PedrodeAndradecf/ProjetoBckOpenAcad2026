@@ -1,0 +1,5 @@
+#### TE
+GET http://localhost:8080/teste
+
+Accept: application/json
+
