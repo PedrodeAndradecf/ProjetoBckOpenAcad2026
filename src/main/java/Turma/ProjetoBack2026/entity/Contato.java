@@ -23,6 +23,12 @@ public class Contato {
     @Column(nullable = false)
     String nome;
 
+    @Column(nullable = false, length = 25)
+    String email;
+
+    @Column(nullable = false, length = 25)
+    String telefone;
+
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "cliente_id", nullable = false)

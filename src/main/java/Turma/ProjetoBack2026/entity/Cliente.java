@@ -22,13 +22,6 @@ public class Cliente {
     @Column(nullable = false, length = 50)
     String nome;
 
-
-    @Column(nullable = false, length = 25)
-    String email;
-
-    @Column(nullable = false, length = 25)
-    String telefone;
-
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Contato> contatos = new ArrayList<>();
