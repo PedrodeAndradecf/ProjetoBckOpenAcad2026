@@ -1,10 +1,14 @@
 package Turma.ProjetoBack2026.services;
 
 import Turma.ProjetoBack2026.dto.requests.ClienteRequestDTO;
+import Turma.ProjetoBack2026.dto.requests.ContatoRequestDTO;
 import Turma.ProjetoBack2026.dto.response.ClienteResponseDTO;
 import Turma.ProjetoBack2026.dto.response.ContatoResponseDTO;
 import Turma.ProjetoBack2026.entity.Cliente;
+import Turma.ProjetoBack2026.entity.Contato;
+import Turma.ProjetoBack2026.exception.ClientNotFoundException;
 import Turma.ProjetoBack2026.mapper.ClienteMapper;
+import Turma.ProjetoBack2026.mapper.ContatoMapper;
 import Turma.ProjetoBack2026.repository.ClienteRepository;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +27,12 @@ public class ClienteService {
         this.repository = repository;
     }
 
+    public ClienteResponseDTO salvarCliente(ClienteRequestDTO requestDTO){
+        Cliente cliente = ClienteMapper.toEntity(requestDTO);
+        Cliente clienteSalvo = repository.save(cliente);
+
+        return ClienteMapper.toResponse(clienteSalvo);
+    }
 
     public List<ClienteResponseDTO> listarTodos(){
         List<Cliente> clientes = repository.findAllComContatos();
@@ -31,6 +41,19 @@ public class ClienteService {
                 .map(ClienteMapper::toResponse)
                 .collect(Collectors.toList());
     }
+
+
+    public List<ContatoResponseDTO> listarContatoPorCliente(Long clientId){
+        Cliente cliente = repository.findById(clientId)
+                .orElseThrow( () -> new ClientNotFoundException("Cliente não encontrado pelo id: " + clientId));
+
+        return cliente.getContatos().stream()
+                .map(ContatoMapper::toResponse)
+                .collect(Collectors.toList());
+    }
+
+
+
 
 
 

@@ -4,6 +4,6 @@ public record ContatoResponseDTO(
         Long id,
         String email,
         String telefone,
-        Long clienteId
+        Long clientId
 ) {
 }
