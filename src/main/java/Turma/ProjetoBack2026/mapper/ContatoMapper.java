@@ -13,6 +13,7 @@ public class ContatoMapper {
         Contato contato = new Contato();
         contato.setEmail(requestDTO.email());
         contato.setTelefone(requestDTO.telefone());
+        contato.setNome(requestDTO.nome());
         contato.setCliente(cliente);
 
         return contato;
@@ -23,6 +24,7 @@ public class ContatoMapper {
                 contato.getId(),
                 contato.getEmail(),
                 contato.getTelefone(),
+                contato.getNome(),
                 contato.getCliente().getId()
         );
     }

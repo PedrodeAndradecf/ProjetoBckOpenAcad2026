@@ -19,9 +19,13 @@ public class ClienteMapper {
 
         if (requestDTO.contatos() != null && !requestDTO.contatos().isEmpty()){
             List<Contato> contatos = requestDTO.contatos().stream()
-                    .map(contatoRespDTO -> ContatoMapper.toEntity(contatoRespDTO, cliente))
+                    .map(contatoRequest -> {
+                       return ContatoMapper.toEntity(contatoRequest, cliente);
+                    })
                     .collect(Collectors.toList());
+            cliente.setContatos(contatos);
         }
+
         return cliente;
     }
 

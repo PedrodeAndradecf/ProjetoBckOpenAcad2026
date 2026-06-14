@@ -17,7 +17,7 @@ import java.util.List;
 public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    long id;
+    Long id;
 
     @Column(nullable = false, length = 50)
     String nome;
